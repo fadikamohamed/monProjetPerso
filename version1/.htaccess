@@ -1,0 +1,11 @@
+<ifmodule mod_rewrite.c>
+RewriteEngine ON
+RewriteRule Accueil.html index.php?page=accueil
+RewriteRule lecture-en-ligne.html index.php?page=readInLine
+RewriteRule inscription.html index.php?page=registration
+RewriteRule profil-utilisateur.html index.php?page=profilUser
+RewriteRule disconnection.html index.php?page=accueil&status=disconect
+RewriteRule mode-scantradeur.html index.php?page=scantrader
+RewriteRule teams.html index.php?page=teams
+RewriteRule palais-de-glace.html index.php?page=Administration
+</ifmodule>

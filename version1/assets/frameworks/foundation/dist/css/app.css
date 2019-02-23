@@ -1,0 +1,336 @@
+.errorMessages {
+  color: white;
+  text-shadow: 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 4px 4px 4px white, 4px 4px 4px white, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 4px -4px 4px white, 4px -4px 4px white;
+  color: red; }
+
+.buttonPerso1 {
+  width: 150px;
+  height: 50px;
+  border-ridge: 3px 0 3px 0;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, -3px 3px 3px black, -3px 3px 3px black, -3px 3px 3px black, -3px 3px 3px black, black 3px 3px 3px, black 3px 3px 3px, black 3px 3px 3px, black 3px 3px 3px, black -3px 3px 3px, black -3px 3px 3px, black -3px 3px 3px, black -3px 3px 3px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px; }
+  .buttonPerso1 a {
+    margin: auto;
+    color: white;
+    text-shadow: 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 4px 4px 4px white, 4px 4px 4px white, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 4px -4px 4px white, 4px -4px 4px white; }
+    .buttonPerso1 a:hover {
+      color: red;
+      text-decoration: underline; }
+
+.buttonPerso2 {
+  width: 150px;
+  height: 50px;
+  border-ridge: 3px 0 3px 0;
+  border-radius: 25px;
+  background-color: transparent;
+  box-shadow: 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, black 3px 3px 3px, black 3px 3px 3px, black 3px 3px 3px, black 3px 3px 3px, black -3px 3px 3px, black -3px 3px 3px, black -3px 3px 3px, black -3px 3px 3px;
+  margin: auto;
+  color: white;
+  text-shadow: 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 4px 4px 4px white, 4px 4px 4px white, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 4px -4px 4px white, 4px -4px 4px white;
+  z-index: 1;
+  display: inline-block; }
+
+.buttonPerso3 {
+  width: 150px;
+  height: 50px;
+  border-ridge: 3px 0 3px 0;
+  border-radius: 25px;
+  background-color: transparent;
+  box-shadow: 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, black 3px 3px 3px, black 3px 3px 3px, black 3px 3px 3px, black 3px 3px 3px, black -3px 3px 3px, black -3px 3px 3px, black -3px 3px 3px, black -3px 3px 3px;
+  margin: auto;
+  text-align: center;
+  color: white;
+  text-shadow: 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 4px 4px 4px white, 4px 4px 4px white, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 4px -4px 4px white, 4px -4px 4px white;
+  z-index: 1;
+  display: inline-block; }
+  .buttonPerso3:hover {
+    color: red;
+    text-decoration: underline; }
+
+.container {
+  background-image: url("../../../../img/fond1.jpg");
+  background-attachment: fixed;
+  min-height: 800px;
+  display: grid;
+  grid-template-columns: 854px 250px 250px; }
+
+#leftSide {
+  position: relative;
+  left: -854px; }
+
+#content {
+  margin-bottom: 50px;
+  position: relative;
+  left: 250px;
+  background-color: rgba(200, 200, 200, 0.5); }
+
+header #banner {
+  background-image: url("../../../../img/banniere1.png");
+  width: 100%;
+  height: 250px;
+  box-shadow: 6px 6px 6px black; }
+  header #banner #title {
+    font-size: 10em;
+    margin: auto;
+    text-align: center;
+    color: white;
+    text-shadow: 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 4px 4px 4px white, 4px 4px 4px white, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 4px -4px 4px white, 4px -4px 4px white; }
+header #navBar {
+  background-color: #003333;
+  width: 100%; }
+  header #navBar ul {
+    background-image: url("../../../../img/banniere2.png");
+    width: 100%; }
+
+.profil {
+  background-color: grey;
+  border: 3px double black;
+  border-radius: 20px; }
+
+#profil {
+  background-color: grey; }
+  #profil #connectionTitle {
+    color: white;
+    text-shadow: 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 4px 4px 4px white, 4px 4px 4px white, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 4px -4px 4px white, 4px -4px 4px white; }
+  #profil #lastConnexion {
+    color: white;
+    color: white;
+    text-shadow: 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 4px 4px 4px white, 4px 4px 4px white, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 4px -4px 4px white, 4px -4px 4px white; }
+  #profil .textConnection {
+    text-shadow: none;
+    color: white; }
+  #profil .inputConnection {
+    background: transparent;
+    color: white;
+    color: white;
+    text-shadow: 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 3px 3px 3px black, 4px 4px 4px white, 4px 4px 4px white, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 3px -3px 3px black, 4px -4px 4px white, 4px -4px 4px white; }
+
+#accueilContent {
+  border: 3px double black; }
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+#showProfilLink {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+#disconnection {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+#avatarProfilConnection {
+  width: 150px;
+  height: 150px;
+  border: 3px solid black; }
+
+#avatarProfil {
+  width: 250px;
+  height: 250px;
+  border: 3px solid black; }
+
+.avatarMini {
+  width: 80px;
+  height: 80px;
+  border: 3px solid black; }
+
+.avatarCard {
+  text-align: center;
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px; }
+
+.avatarButton {
+  display: block; }
+
+.profilBox {
+  background-color: rgba(200, 200, 200, 0.5);
+  margin: 10px; }
+
+.cntr {
+  margin: auto;
+  margin-top: 50px;
+  justify-content: center;
+  padding: auto; }
+
+.hide {
+  visibility: hidden; }
+
+.checkList {
+  text-align: left;
+  width: 20.50%;
+  display: inline-block; }
+
+.warningClass {
+  color: #839D2D; }
+
+.separat {
+  background-color: black;
+  height: 3px;
+  width: 95%; }
+
+.separatSlim {
+  background-color: black;
+  height: 1px;
+  width: 80%;
+  margin-top: 5px; }
+
+.mangaMini {
+  max-width: 100px; }
+
+.avatarMiniComment {
+  max-width: 100px; }
+
+.commentDate, .commentProfil {
+  text-align: center; }
+
+.avatarResearch {
+  max-width: 50px; }
+
+.mangaBanner {
+  max-width: 700px;
+  max-height: 800px; }
+
+.mangaFiche {
+  margin: auto;
+  text-align: center; }
+
+#footer {
+  background-color: black;
+  border-radius: 10px;
+  border: 3px solid #000000;
+  width: 100%;
+  height: 200px; }
+
+.case {
+  width: 854; }
+
+.draggable {
+  width: 90px;
+  height: 90px;
+  padding: 0.5em;
+  float: left;
+  margin: 0 10px 10px 0; }
+
+#sortable .ui-selecting {
+  background: #FECA40; }
+
+#sortable .ui-selected {
+  background: #F39814;
+  color: white; }
+
+#sortable {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%; }
+
+#sortable div {
+  margin: 0 3px 3px 3px;
+  padding: 0.4em;
+  padding-left: 1.5em;
+  font-size: 1em;
+  width: 131.6px;
+  height: 150px;
+  justify-content: center; }
+  #sortable div p {
+    text-align: center; }
+
+#draggable div {
+  margin: 0 3px 3px 3px;
+  padding: 0.4em;
+  padding-left: 1.5em;
+  font-size: 1em;
+  width: 131.6px;
+  height: 150px;
+  justify-content: center;
+  background-color: white; }
+
+#containment-wrapper {
+  width: 850px;
+  height: 325px;
+  border: 2px solid grey;
+  padding: 10px;
+  justify-content: center; }
+
+.dossier {
+  position: relative;
+  background-color: transparent;
+  background-image: url("../../../../img/folder.png");
+  background-size: 100% 100%; }
+  .dossier img {
+    cursor: move; }
+
+.chapterFolder {
+  position: relative; }
+  .chapterFolder img {
+    cursor: move; }
+
+.deleteIcon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30px;
+  visibility: visible; }
+
+.updateIcon {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  visibility: visible; }
+
+.error {
+  color: red; }
+
+.success {
+  color: green; }
+
+#containment-wrapper {
+  background: -moz-radial-gradient(center, ellipse cover, silver 0%, silver 65%, black 100%);
+  /* ff3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, silver), color-stop(65%, silver), color-stop(100%, black));
+  /* safari4+,chrome */
+  background: -webkit-radial-gradient(center, ellipse cover, silver 0%, silver 65%, black 100%);
+  /* safari5.1+,chrome10+ */
+  background: -o-radial-gradient(center, ellipse cover, silver 0%, silver 65%, black 100%);
+  /* opera 11.10+ */
+  background: -ms-radial-gradient(center, ellipse cover, silver 0%, silver 65%, black 100%);
+  /* ie10+ */
+  background: radial-gradient(ellipse at center, silver 0%, silver 65%, black 100%);
+  /* w3c */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c0c0c0', endColorstr='#000000',GradientType=1 );
+  /* ie6-9 */ }
+
+/*.ui-dialog{
+    position: relative;
+    background-color: grey;
+    border-radius: 15px;
+    min-width: 500px;
+    .ui-dialog-titlebar{
+    position: absolute;
+    right: 0;
+    top: 0;
+    justify-content: right;
+    width: 20px;
+    height: 30px;
+    border-radius: 15px;
+    .ui-button{        
+    position: absolute;
+    }
+    }
+    input{
+    border-radius: 5px;
+        
+    }
+}*/
+
+/*# sourceMappingURL=app.css.map */
