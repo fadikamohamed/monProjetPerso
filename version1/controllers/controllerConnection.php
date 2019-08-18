@@ -30,7 +30,7 @@ if (isset($_POST['connectionSubmit']))
     {   //Intgration d'un message d'erreur dans le tableau d'érreur
         $formError['loginConnection'] = 'Vous devez entrer un login !';
     }
-
+    
     //Si $_POST['passwordConnection'])) n'est pas vide
     if (!empty($_POST['passwordConnection']))
     {   //Désactivation des balises contenu dans $_POST['passwordConnection'])) et intégration dans $passwordConnection
@@ -49,41 +49,46 @@ if (isset($_POST['connectionSubmit']))
     {   //Intgration d'un message d'erreur dans le tableau d'érreur
         $formError['passwordConnection'] = 'Vous devez entrer un mot de passe !';
     }
-
+    
     //Si le nombre d'entrés dans le tableau est égale a 0 
     if (count($formError) == 0)
     {   //Associer la valeur de $passwordConnection a l'attribut $password de l'instance $connectUser
         $connectUser->password = password_hash($passwordConnection, PASSWORD_BCRYPT);
         $profilUser = $connectUser->connectionUser();
-
+        
         if (is_object($profilUser))
         {
-            $passwordVerif = password_verify($passwordConnection, $profilUser->password);
-            if ($passwordVerif == 1)
+            if ($profilUser->disabled == 1)
             {
-                $connectUser->id = $profilUser->id;
-                $lastConnection = $connectUser->updateLastConnection();
-                if (is_object($lastConnection))
+                $passwordVerif = password_verify($passwordConnection, $profilUser->password);
+                if ($passwordVerif == 1)
                 {
-                    $_SESSION['id'] = $profilUser->id;
-                    $_SESSION['login'] = $profilUser->login;
-                    $_SESSION['birthdate'] = $profilUser->birthdate;
-                    $_SESSION['avatar'] = $profilUser->avatarLink;
-                    $_SESSION['isConnected'] = true;
-                    $_SESSION['mail'] = $profilUser->mail;
-                    $_SESSION['gender'] = $profilUser->gender;
-                    $_SESSION['country'] = $profilUser->country;
-                    $_SESSION['registrationDate'] = $profilUser->registrationDate;
-                    $_SESSION['idMemberRight'] = $profilUser->idMembersRights;
-                    $_SESSION['lastConnection'] = $lastConnection->lastConnection;
-                    header('Location: profil-utilisateur.html');
-                }else{
-                    $formError['connection'] = 'Une érreur est survenue !';
+                    $connectUser->id = $profilUser->id;
+                    $lastConnection = $connectUser->updateLastConnection();
+                    if (is_object($lastConnection))
+                    {
+                        $_SESSION['id'] = $profilUser->id;
+                        $_SESSION['login'] = $profilUser->login;
+                        $_SESSION['birthdate'] = $profilUser->birthdate;
+                        $_SESSION['avatar'] = $profilUser->avatarLink;
+                        $_SESSION['isConnected'] = true;
+                        $_SESSION['mail'] = $profilUser->mail;
+                        $_SESSION['gender'] = $profilUser->gender;
+                        $_SESSION['country'] = $profilUser->country;
+                        $_SESSION['registrationDate'] = $profilUser->registrationDate;
+                        $_SESSION['idMemberRight'] = $profilUser->idMembersRights;
+                        $_SESSION['lastConnection'] = $lastConnection->lastConnection;
+                        header('Location: profil-utilisateur.html');
+                    }else{
+                        $formError['connection'] = 'Une érreur est survenue !';
+                    }
                 }
-            }
-            else
-            {
-                $formError['passwordConnection'] = 'Mauvais mot de passe !';
+                else
+                {
+                    $formError['passwordConnection'] = 'Mauvais mot de passe !';
+                }
+            } else{
+                $formError['connection'] = 'Ce compte n\existe pas ou a était supprimé !';
             }
         }
     }

@@ -9,7 +9,7 @@
 //    {
     echo isset($formError['showTeam']) ? $formError['showTeam'] : NULL;
 
-    if ((isset($_SESSION['memberTeamRight']) && ($_SESSION['memberTeamRight'] == 1)) OR ( $_SESSION['idMemberRight'] == 1))
+    if ((isset($_SESSION['memberTeamRight']) && ($_SESSION['memberTeamRight'] == 1)) OR (isset($_SESSION['memberTeamRight']) && $_SESSION['idMemberRight'] == 1))
     {
         ?>
         <button id="teamManagement">Gestion</button>
@@ -20,7 +20,7 @@
         <!-- Accueil ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
         <h4>Dernieres publications</h4>
         <?php
-        if ((isset($_SESSION['memberTeamRight']) && ($_SESSION['memberTeamRight'] == 1)) OR ( $_SESSION['idMemberRight'] == 1))
+        if ((isset($_SESSION['memberTeamRight']) && ($_SESSION['memberTeamRight'] == 1)) OR (isset($_SESSION['idMemberRight']) && $_SESSION['idMemberRight'] == 1))
         {
             ?>
         <form action="#" method="POST">
@@ -78,7 +78,7 @@
             <p class="error"><?= $formError['verif'] ?></p>
             <?php
         }
-        if ((isset($_SESSION['memberTeamRight']) && ($_SESSION['memberTeamRight'] == 1)) OR ( $_SESSION['idMemberRight'] == 1))
+        if ((isset($_SESSION['memberTeamRight']) && ($_SESSION['memberTeamRight'] == 1)) OR (isset($_SESSION['idMemberRight']) && $_SESSION['idMemberRight'] == 1))
         {
             ?>            
             <button id="boxShowHide" type="submit" class="boxShowHide secondary button">Ajouter une série</button>
@@ -216,7 +216,7 @@
                     <tr>
                         <td><img class="avatarResearch" src="<?= $list->avatarLink ?>" /></td>
                         <td><a href=""></a><?= $list->login ?></td>
-                        <td><?= $list->TeamsRight ?></td>
+                        <td><?= $list->rank ?></td>
                         <td><?= $list->addingDate ?></td>
                         <td><input id="" type="submit" name="" value="Retirer" /></td>
                     </tr>

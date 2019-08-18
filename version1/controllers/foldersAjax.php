@@ -96,7 +96,7 @@ elseif (!isset($_POST['srcDeleteFile']))
     $title = str_replace(' ', '_', $_SESSION['mangaTitle']);
     $idTeam = $_SESSION['idTeam'];
     $idManga = $_SESSION['idManga'];
-    $storeFolder = '/home/mohamedf/Documents/monProjetPerso/version1/mangas' . $ds . $idTeam;
+    $storeFolder = '../mangas' . $ds . $idTeam;
     //Si le dossier n'existe pas
     if (!is_dir($storeFolder))
     {   //Créer le dossier de la team
@@ -131,7 +131,7 @@ elseif (!isset($_POST['srcDeleteFile']))
                 $nbr_fichier++;
                 echo '<div id="' . $inFolder . '" class="draggable ui-widget-content dossier">
                 <p>' . $inFolder . '</p>
-                    <img id="' . $inFolder . '" src="assets/img/delete.png" class="deletefolder" />
+                    <img id="' . $_SESSION['idManga'] . '"name="' . $inFolder . '" src="assets/img/delete.png" class="deletefolder" />
             </div>';
             }
         }
@@ -155,12 +155,17 @@ if (!empty($_POST['srcDeleteFile']))
 
 if (!empty($_POST['srcDeleteFolder']))
 {
-    $folderName = htmlspecialchars($_POST['srcDeleteFolder']);
-    $folderPath = 'mangas' . '/' . $_SESSION['idTeam'] . '/' . $_SESSION['idManga'] . '/' . 'chapters/' . $folderName;
+    $folderName = htmlspecialchars($_POST['nameFolder']);
+    $folderid = htmlspecialchars($_POST['srcDeleteFolder']);
+    $folderPath = '../mangas' . '/' . $_SESSION['idTeam'] . '/' . $_SESSION['idManga'] . '/' . 'chapters/' . $folderName;
     $deleteResult = rmdir($folderPath);
     if ($deleteResult == true)
     {
         echo 'true';
+        $deleteChapter = NEW Chapters;
+        $deleteChapter->chapter = $folderName;
+        $deleteChapter->idMangas = $_SESSION['idManga'];
+        $delete = $deleteChapter->deleteChapters();
     }
     else
     {

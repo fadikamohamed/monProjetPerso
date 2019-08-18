@@ -31,7 +31,7 @@ if (!empty($_FILES))
     $title = str_replace(' ', '_', $_SESSION['mangaTitle']);
     $idTeam = $_SESSION['idTeam'];
     $idManga = $_SESSION['idManga'];
-    $storeFolder = '/home/mohamedf/Documents/monProjetPerso/version1/mangas' . $ds . $idTeam . $ds . $idManga . $ds . 'chapters';
+    $storeFolder = '../mangas' . $ds . $idTeam . $ds . $idManga . $ds . 'chapters';
     if (isset($_SESSION['folderIn']))
     {
         $tempFile = $_FILES['file']['tmp_name'];

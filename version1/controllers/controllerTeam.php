@@ -7,13 +7,13 @@ function team($id)
     $members = NEW Users();
     $members->idScantradTeams = $id;
     $membersList = $members->getMembresTeam();
-
-    if (isset($_SESSION['isConnected']))
-    {
-        $getTeam = NEW ScantradTeams();
-        $getTeam->id = $id;
+    $getTeam = NEW ScantradTeams();
+    $getTeam->id = $id;    
+    $showTeam = $getTeam->getTeamById();
+    if (isset($_SESSION['isConnected']) AND $_SESSION['isConnected'] = true)
+    {        
         $getTeam->idUsers = $_SESSION['id'];
-        $showTeam = $getTeam->getTeamById();
+        
         if ($getUserTeamRight = $getTeam->getUserTeamRight())
         {
             $_SESSION['memberTeamRight'] = $getUserTeamRight->idMembersTeamRight;

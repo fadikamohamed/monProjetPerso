@@ -54,8 +54,8 @@ function profilUser()
     $country = new Countrys();
     //Et on interger la réponse dans la variable $countryListe
     $countryListe = $country->getListCountrys();
-
-
+    
+    
     //Si $_POST['deleteUserSubmit'] existe 
     if (isset($_POST['deleteUserSubmit']))
     {   //Si $_POST['passwordForDelete'] n'est pas vide
@@ -68,25 +68,33 @@ function profilUser()
             $profilInfo = $profilModify->connectionUser();
             //Si $profilInfo est un objet
             if (is_object($profilInfo))
-            {   //comparer le mot de passe reçu dans $password avec et celui reçu dans $profilInfo et intégrer le résultat dans $passwordVerif
-                $passwordVerif = password_verify($password, $profilInfo->password);
-                //Si ils sont identiques donc que la variable $passwordVerif est égale a un 
-                if ($passwordVerif == 1)
-                {   //Hydrater l'attribut id de l'instance $profilModify avec la valeur de $_SESSION['id']
-                    $profilModify->id = $_SESSION['id'];
-                    //Si la réponse de la méthode deleteUser() est égale a true
-                    if ($profilModify->deleteUser())
-                    {   //Rediriger vers le fichier de déconnexion
-                        header('Location: disconnection');
-                    }//Sinon
-                    else
-                    {   //Intégrer un message d'erreur dans $formError
-                        $formStatus['deleteProfil'] = 'La suppréssion a échoué !';
+            {   
+                if($profilInfo->idMembersTeamRight != 1)
+                {                    
+                    //comparer le mot de passe reçu dans $password avec et celui reçu dans $profilInfo et intégrer le résultat dans $passwordVerif
+                    $passwordVerif = password_verify($password, $profilInfo->password);
+                    //Si ils sont identiques donc que la variable $passwordVerif est égale a un 
+                    if ($passwordVerif == 1)
+                    {   //Hydrater l'attribut id de l'instance $profilModify avec la valeur de $_SESSION['id']
+                        $profilModify->id = $_SESSION['id'];
+                        //Si la réponse de la méthode deleteUser() est égale a true
+                        if ($profilModify->deleteUser())
+                        {   
+                            $_SESSION['isConnected'] = false;
+                            //Rediriger vers le fichier de déconnexion
+                            header('Location: disconnection.html');
+                        }//Sinon
+                        else
+                        {   //Intégrer un message d'erreur dans $formError
+                            $formStatus['deleteProfil'] = 'La suppréssion a échoué !';
+                        }
                     }
-                }
-                else
-                {
-                    $formError['deleteProfil'] = 'Mauvais mot de passe !';
+                    else
+                    {
+                        $formError['deleteProfil'] = 'Mauvais mot de passe !';
+                    }                    
+                }else{
+                    $formError['deleteProfil'] = 'Vous ne pouvez pas suprimer votre compte tant que vous etes Leader d\'une équipe !';
                 }
             }
             else
@@ -251,97 +259,97 @@ if (isset($_POST['profilModifSubmit']))
     {
         echo '<p class="check error">La modification n\'a pu avoir lieu car :</p>'
         . '<?php foreach($formError as $msg) {'
-        . '<p class="error"><?= $msg ?></p>'
-        . '}'
-        . '<p>Pseudo : <?= $_SESSION[\'login\'] ?></p>'
-        . '<p>Né le : <?= $_SESSION[\'birthdate\'] ?></p>'
-        . '<p>Né le : <?= $_SESSION[\'mail\'] ?></p>'
-        . '<p>E-mail : <?= $_SESSION[\'gender\'] ?></p>'
-        . '<p>E-mail : <?= $_SESSION[\'country\'] ?></p>';
-    }
-}
-
-//Si $_POST['password'] n'est pas vide 
-if (isset($_POST['password']))
-{   //Déclaration du tableau $formError
-    $formError = array();
-    //Si $_POST['password'] n'est pas vide 
-    if (!empty($_POST['password']))
-    {   //Si $_POST['password'] passe la régex
-        if (preg_match($passwordRegex, $_POST['password']))
-        {   //Désactiver les balise dans $_POST['password'] et l'inclure dans la variable $password
-            $password = htmlspecialchars($_POST['password']);
+            . '<p class="error"><?= $msg ?></p>'
+            . '}'
+            . '<p>Pseudo : <?= $_SESSION[\'login\'] ?></p>'
+            . '<p>Né le : <?= $_SESSION[\'birthdate\'] ?></p>'
+            . '<p>Né le : <?= $_SESSION[\'mail\'] ?></p>'
+            . '<p>E-mail : <?= $_SESSION[\'gender\'] ?></p>'
+            . '<p>E-mail : <?= $_SESSION[\'country\'] ?></p>';
         }
-        else
-        {   
-            $formError['password'] = 'Le mot de passe n\'est pas conforme';
-        }
-    }
-    else
-    {
-            $formError['password'] = 'Vous devez entrer un mot de passe';
     }
     
-    //Si $_POST['newPassword'] n'est pas vide 
-    if (!empty($_POST['newPassword']))
-    {   //Si $_POST['newPassword'] passe la régex
-        if (preg_match($passwordRegex, $_POST['newPassword']))
-        {   //Désactiver les balise dans $_POST['newPassword'] et l'inclure dans la variable $newPassword
-            $newPassword = htmlspecialchars($_POST['newPassword']);
-            //Si $_POST['newPasswordConfirm'] n'est pas vide 
-            if (!empty($_POST['newPasswordConfirm']))
-            {   //Si $_POST['newPasswordConfirm'] passe la régex
-                if (preg_match($passwordRegex, $_POST['newPasswordConfirm']))
-                {   //Désactiver les balise dans $_POST['newPasswordConfirm'] et l'inclure dans la variable $newPasswordConfirm
-                    $newPasswordConfirm = htmlspecialchars($_POST['newPasswordConfirm']);
-                    //Si les deux mot de passe ne sont pas identiques
-                    if ($newPassword !== $newPasswordConfirm)
-                    {   
-                        $formError['newPasswordConfirm'] = 'Les deux mots de passe doivent être identiques';
-                        echo 'Les deux mots de passe doivent être identiques';
-                    }
-                }
-                else
-                {
-                    $formError['newPasswordConfirm'] = 'Le mot de passe de confirmation n\'est pas conforme';
-                }
+    //Si $_POST['password'] n'est pas vide 
+    if (isset($_POST['password']))
+    {   //Déclaration du tableau $formError
+        $formError = array();
+        //Si $_POST['password'] n'est pas vide 
+        if (!empty($_POST['password']))
+        {   //Si $_POST['password'] passe la régex
+            if (preg_match($passwordRegex, $_POST['password']))
+            {   //Désactiver les balise dans $_POST['password'] et l'inclure dans la variable $password
+                $password = htmlspecialchars($_POST['password']);
             }
             else
-            {
-                $formError['newPasswordConfirm'] = 'Vous devez entrer un mot de passe de confirmation';
+            {   
+                $formError['password'] = 'Le mot de passe n\'est pas conforme';
             }
         }
         else
         {
-            $formError['newPassword'] = 'Le mot de passe n\'est pas conforme';
+            $formError['password'] = 'Vous devez entrer un mot de passe';
         }
-    }
-    else
-    {
-        $formError['newPassword'] = 'Vous devez entrer un mot de passe';
-    }
-
-    //Si $formError est vide 
-    if (count($formError) == 0)
-    {   //Déclarer l'instance $updatePassword de la class Users()
-        $updatePassword = NEW Users();
-        //Intégration de la valeur de $_SESSION['id'] dans l'attribut id de l'instance $updatePassword
-        $updatePassword->id = $_SESSION['id'];
-        //Intégration du résultat de la méthode verifPassword() dans $lastPassword
-        $lastPassword = $updatePassword->verifPassword();
-        //Si la vérification du mot de passe renvoie true
-        if (password_verify($password, $lastPassword->password))
-        {   //Intégrer le mot de passe haché dans l'attribut password de l'instance $updatePassword
-            $updatePassword->password = password_hash($newPassword, PASSWORD_BCRYPT);
-            //Si la méthode updatePassword() revoie true
-            if ($updatePassword->updatePassword())
-            {  
-                echo '<p class="success">Votre mot de passe a bien été modifié</p>';
+        
+        //Si $_POST['newPassword'] n'est pas vide 
+        if (!empty($_POST['newPassword']))
+        {   //Si $_POST['newPassword'] passe la régex
+            if (preg_match($passwordRegex, $_POST['newPassword']))
+            {   //Désactiver les balise dans $_POST['newPassword'] et l'inclure dans la variable $newPassword
+                $newPassword = htmlspecialchars($_POST['newPassword']);
+                //Si $_POST['newPasswordConfirm'] n'est pas vide 
+                if (!empty($_POST['newPasswordConfirm']))
+                {   //Si $_POST['newPasswordConfirm'] passe la régex
+                    if (preg_match($passwordRegex, $_POST['newPasswordConfirm']))
+                    {   //Désactiver les balise dans $_POST['newPasswordConfirm'] et l'inclure dans la variable $newPasswordConfirm
+                        $newPasswordConfirm = htmlspecialchars($_POST['newPasswordConfirm']);
+                        //Si les deux mot de passe ne sont pas identiques
+                        if ($newPassword !== $newPasswordConfirm)
+                        {   
+                            $formError['newPasswordConfirm'] = 'Les deux mots de passe doivent être identiques';
+                            echo 'Les deux mots de passe doivent être identiques';
+                        }
+                    }
+                    else
+                    {
+                        $formError['newPasswordConfirm'] = 'Le mot de passe de confirmation n\'est pas conforme';
+                    }
+                }
+                else
+                {
+                    $formError['newPasswordConfirm'] = 'Vous devez entrer un mot de passe de confirmation';
+                }
             }
             else
             {
-                echo '<p class="error">Votre mot de passe n\'a pas pu être modifié !</p>';
+                $formError['newPassword'] = 'Le mot de passe n\'est pas conforme';
+            }
+        }
+        else
+        {
+            $formError['newPassword'] = 'Vous devez entrer un mot de passe';
+        }
+        
+        //Si $formError est vide 
+        if (count($formError) == 0)
+        {   //Déclarer l'instance $updatePassword de la class Users()
+            $updatePassword = NEW Users();
+            //Intégration de la valeur de $_SESSION['id'] dans l'attribut id de l'instance $updatePassword
+            $updatePassword->id = $_SESSION['id'];
+            //Intégration du résultat de la méthode verifPassword() dans $lastPassword
+            $lastPassword = $updatePassword->verifPassword();
+            //Si la vérification du mot de passe renvoie true
+            if (password_verify($password, $lastPassword->password))
+            {   //Intégrer le mot de passe haché dans l'attribut password de l'instance $updatePassword
+                $updatePassword->password = password_hash($newPassword, PASSWORD_BCRYPT);
+                //Si la méthode updatePassword() revoie true
+                if ($updatePassword->updatePassword())
+                {  
+                    echo '<p class="success">Votre mot de passe a bien été modifié</p>';
+                }
+                else
+                {
+                    echo '<p class="error">Votre mot de passe n\'a pas pu être modifié !</p>';
+                }
             }
         }
     }
-}

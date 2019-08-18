@@ -42,9 +42,10 @@ class Chapters {
     {
         $query = 'SELECT `id`, `chapter`, `locationLink`, `addingDate` '
                 . 'FROM `gt1m_chapters` '
-                . 'WHERE `idMangas`=:idMangas';
+                . 'WHERE `idMangas`=:idMangas AND `disabled`=:disabled';
         $getList = $this->pdo->prepare($query);
         $getList->bindValue(':idMangas', $this->idMangas, PDO::PARAM_INT);
+        $getList->bindValue(':disabled', 1, PDO::PARAM_INT);
         $getList->execute();
         return $getList->fetchAll(PDO::FETCH_OBJ);
     }
@@ -55,7 +56,8 @@ class Chapters {
         $query = 'SELECT `m`.`title`, `c`.`id`, `c`.`chapter` '
                 . 'FROM `gt1m_chapters` AS `c` '
                 . 'INNER JOIN `gt1m_mangas` `m` '
-                . 'ON `c`.`idMangas`=`m`.`id`';
+                . 'ON `c`.`idMangas`=`m`.`id` '
+                . 'WHERE `c`.`disabled`=1';
         $getChapters = $this->pdo->query($query);
         $result = $getChapters->fetchAll(PDO::FETCH_OBJ);
         if (is_array($result))
@@ -75,9 +77,10 @@ class Chapters {
                 . 'FROM `gt1m_chapters` AS `c` '
                 . 'INNER JOIN `gt1m_mangas` AS `m` '
                 . 'ON `c`.`idMangas`=`m`.`id` '
-                . 'WHERE `c`.`id`=:id';
+                . 'WHERE `c`.`id`=:id AND `c`.`disabled`=:disabled';
         $getChapter = $this->pdo->prepare($query);
         $getChapter->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $getChapter->bindValue(':disabled', 1, PDO::PARAM_INT);
         $getChapter->execute();
         $getChapterResult = $getChapter->fetch(PDO::FETCH_OBJ);
         if (is_object($getChapterResult))
@@ -93,9 +96,12 @@ class Chapters {
     public function deleteChapters()
     {
         $result = false;
-        $query = 'DELETE FROM `gt1m_chapters` '
-                . 'WHERE `idMangas`=:idMangas';
+        $query = 'UPDATE `gt1m_chapters` '
+                . 'SET `disabled`=:disabled '
+                . 'WHERE `idMangas`=:idMangas AND `chapter`=:chapter';
         $deleteManga = $this->pdo->prepare($query);
+        $deleteManga->bindValue(':disabled', 2, PDO::PARAM_INT);
+        $deleteManga->bindValue(':chapter', $this->chapter, PDO::PARAM_STR);
         $deleteManga->bindValue(':idMangas', $this->idMangas, PDO::PARAM_INT);
         if ($deleteManga->execute())
         {

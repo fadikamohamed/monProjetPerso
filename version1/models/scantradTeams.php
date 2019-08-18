@@ -16,10 +16,11 @@ class ScantradTeams {
 
     public function addScantradTeam()
     {
-        $addTeamQuery = 'INSERT INTO `gt1m_scantradTeams`(`teams`, `bannerLink`, `createdByUserId`, `addingDate`) '
-                . 'VALUES (:teams, :bannerLink, :createdByUserId, CURDATE())';
+        $addTeamQuery = 'INSERT INTO `gt1m_scantradTeams`(`teams`, `bannerLink`, `idUsers`, `createdByUserId`, `addingDate`) '
+                . 'VALUES (:teams, :bannerLink, :idUsers, :createdByUserId, CURDATE())';
         $addTeam = $this->pdo->prepare($addTeamQuery);
         $addTeam->bindValue(':teams', $this->teams, PDO::PARAM_STR);
+        $addTeam->bindValue(':idUsers', $this->idUsers, PDO::PARAM_INT);
         $addTeam->bindValue(':bannerLink', 'assets/img/avatar.png', PDO::PARAM_STR);
         $addTeam->bindValue(':createdByUserId', $this->idUsers, PDO::PARAM_INT);
 

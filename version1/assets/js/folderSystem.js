@@ -152,6 +152,7 @@ $(function () {
 
             $('.deleteFolder').click(function () {
                 var folderId = $(this).attr('id');
+                var folderName = $(this).attr('name');
                 $('#addChapterResult').empty();
                 $('#addChapterResult').append('Êtes vous sur de vouloir supprimer ce dossier ?');
                 $('#addChapterResult').dialog({
@@ -168,7 +169,8 @@ $(function () {
                                 $.post(
                                         'controllers/foldersAjax.php',
                                         {
-                                            srcDeleteFolder: folderId
+                                            srcDeleteFolder: folderId,
+                                            nameFolder: folderName
                                         },
                                         function result(response) {
                                             $('#addChapterResult').empty();
@@ -260,4 +262,6 @@ $(function () {
             }
         }
     });
+    //Supprimer un chapitre
+    $
 });

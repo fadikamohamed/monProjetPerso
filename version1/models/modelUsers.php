@@ -123,17 +123,21 @@ class Users {
      */
     public function connectionUser()
     {
-        $query = 'SELECT `us`.`id`, `us`.`login`, '
+        $query = 'SELECT `us`.`id`, `us`.`login`, `us`.`disabled`, '
                 . 'DATE_FORMAT(`us`.`birthdate`, \'%d %M %Y\') '
                 . 'AS `birthdate`, `us`.`mail`, `us`.`password`, `us`.`avatarLink`, '
                 . 'DATE_FORMAT(`us`.`registrationDate`, \'%d %M %Y\') AS `registrationDate`, '
-                . 'DATE_FORMAT(`us`.`lastConnection`, \'le %d %M %Y à %H h %i\') AS `lastConnection`, `us`.`idGenders`, `us`.`idCountrys`, `us`.`idMembersRights`, `cntry`.`country`, `gdrs`.`gender` '
+                . 'DATE_FORMAT(`us`.`lastConnection`, \'le %d %M %Y à %H h %i\') AS `lastConnection`, '
+                . '`us`.`idGenders`, `us`.`idCountrys`, `us`.`idMembersRights`, '
+                . '`cntry`.`country`, `gdrs`.`gender`, `mt`.`idMembersTeamRight` '
                 . 'FROM `gt1m_users` '
                 . 'AS `us` '
                 . 'LEFT JOIN `gt1m_countrys` 
                     AS `cntry` ON `us`.`idCountrys`=`cntry`.`id` '
                 . 'LEFT JOIN `gt1m_genders` 
                     AS `gdrs` ON `us`.`idGenders`=`gdrs`.`id` '
+                . 'INNER JOIN `gt1m_membersTeam` '
+                .  'AS `mt` ON `us`.`id` = `mt`.`idUsers`'
                 . 'WHERE `us`.`login`=:login';
         $connectUser = $this->pdo->prepare($query);
         $connectUser->bindValue(':login', $this->login, PDO::PARAM_STR);
@@ -263,8 +267,11 @@ class Users {
     public function deleteUser()
     {
         $result = false;
-        $query = 'DELETE FROM `gt1m_users` WHERE `id`=:id';
+        $query = 'UPDATE `gt1m_users` '
+                . 'SET `disabled`= :disabled '
+                . 'WHERE `id`=:id';
         $deleteUser = $this->pdo->prepare($query);
+        $deleteUser->bindvalue(':disabled', 2, PDO::PARAM_INT);
         $deleteUser->bindValue(':id', $this->id, PDO::PARAM_INT);
         if ($deleteUser->execute())
         {
@@ -298,11 +305,11 @@ class Users {
      */
     public function getMembresTeam()
     {
-        $query = 'SELECT `usr`.`id`, `usr`.`login`, `usr`.`avatarLink`, DATE_FORMAT(`mbt`.`addingDate`, \'%d %M %Y\') as `addingDate`, `mtr`.`TeamsRight` '
+        $query = 'SELECT `usr`.`id`, `usr`.`login`, `usr`.`avatarLink`, DATE_FORMAT(`mbt`.`addingDate`, \'%d %M %Y\') as `addingDate`, `mtr`.`rank` '
                 . 'FROM `gt1m_users` as `usr` '
                 . 'INNER JOIN `gt1m_membersTeam` as `mbt` ON `mbt`.`idUsers`=`usr`.`id`'
                 . 'INNER JOIN `gt1m_scantradTeams` as `sctt` ON `mbt`.`idScantradTeams`=`sctt`.`id` '
-                . 'INNER JOIN `gt1m_membersTeamRights` as `mtr` ON `mtr`.`id`=`mbt`.`idMembersTeamRight` '
+                . 'INNER JOIN `gt1m_membersTeamRight` as `mtr` ON `mtr`.`id`=`mbt`.`idMembersTeamRight` '
                 . 'WHERE `mbt`.`idScantradTeams`=:idTeam';
         $getMembers = $this->pdo->prepare($query);
         $getMembers->bindValue(':idTeam', $this->idScantradTeams, PDO::PARAM_INT);

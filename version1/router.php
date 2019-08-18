@@ -14,6 +14,7 @@ if (isset($_GET['page']))
         if (isset($_GET['status']) && ($_GET['status'] == 'disconect'))
         {   //Appeler le fichier disconnection.php
             require_once 'controllers/disconnection.php';
+            $_SESSION['isConnected'] = false;
             //Rediriger vers index.php
             header('Location: Accueil.html');
         }//Sinon

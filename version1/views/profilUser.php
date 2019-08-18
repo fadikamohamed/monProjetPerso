@@ -180,7 +180,7 @@ if (!session_id())
             if (isset($formError['deleteProfil']))
             {
                 ?>
-                <p><?= $formError['deleteProfil'] ?></p>
+                <p class="warningClass"><?= $formError['deleteProfil'] ?></p>
             <?php }
             ?>
             <input id="deleteUserSubmit" type="submit" name="deleteUserSubmit" value="Supprimer" />
