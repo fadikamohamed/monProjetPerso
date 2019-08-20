@@ -55,7 +55,6 @@ if (isset($_POST['connectionSubmit']))
     {   //Associer la valeur de $passwordConnection a l'attribut $password de l'instance $connectUser
         $connectUser->password = password_hash($passwordConnection, PASSWORD_BCRYPT);
         $profilUser = $connectUser->connectionUser();
-        
         if (is_object($profilUser))
         {
             if ($profilUser->disabled == 1)
@@ -63,6 +62,7 @@ if (isset($_POST['connectionSubmit']))
                 $passwordVerif = password_verify($passwordConnection, $profilUser->password);
                 if ($passwordVerif == 1)
                 {
+                    
                     $connectUser->id = $profilUser->id;
                     $lastConnection = $connectUser->updateLastConnection();
                     if (is_object($lastConnection))
@@ -90,6 +90,8 @@ if (isset($_POST['connectionSubmit']))
             } else{
                 $formError['connection'] = 'Ce compte n\existe pas ou a était supprimé !';
             }
+        }else{
+            $formError['connection'] = 'Impossible d\'obtenir les informations de l\'utilisateur';
         }
     }
 }

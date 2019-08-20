@@ -1,29 +1,31 @@
 <?php
 require_once 'views/header.php';
 ?>
-<div id="container" class="container">
+<div id="container" class="container align-center">
     <!-- Routeur -->
-    <div id="content" class="large-8 medium-8">
+    <div class="row">
+    <div id="content" class="large-12  medium-12 small-12">
         <?php
         require_once 'router.php';
         ?>
     </div>
+    </div>
     <!-- LeftSide -->
-    <div id="leftSide">
-        <div class="large-12">
+    <div id="leftSide" class=" row">
+        <div class="large-11">
             <?php
             require_once 'views/profilConnection.php';
             ?>
         </div>
-        <div class="large-12">
+        <div class="large-12 medium-12 small-12">
             <?php
             require_once 'views/favorites.php';
             ?>
         </div>
     </div>
     <!-- RightSide -->
-    <div class="grid-x">
-        <div class="large-12">
+    <div class=" row">
+        <div class="large-11 medium-12 small-12">
             <?php
             require_once 'views/lastPost.php';
             ?>

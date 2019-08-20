@@ -25,8 +25,8 @@ class Users {
      */
     public function addUser()
     {
-        $query = 'INSERT INTO `gt1m_users`(`login`, `birthdate`, `mail`, `password`, `avatarLink`, `registrationDate`, `lastConnection`, `idGenders`, `idCountrys`, `idMembersRights`) '
-                . 'VALUES (:login, :birthdate, :mail, :password, :avatarLink, CURDATE(), NOW(), :idGenders, :idCountrys, :idMembersRights)';
+        $query = 'INSERT INTO `gt1m_users`(`login`, `birthdate`, `mail`, `password`, `avatarLink`, `registrationDate`, `lastConnection`, `idGenders`, `idCountrys`, `idMembersRights`, `disabled`) '
+                . 'VALUES (:login, :birthdate, :mail, :password, :avatarLink, CURDATE(), NOW(), :idGenders, :idCountrys, :idMembersRights, :disabled)';
         $addUser = $this->pdo->prepare($query);
         $addUser->bindValue(':login', $this->login, PDO::PARAM_STR);
         $addUser->bindValue(':birthdate', $this->birthdate, PDO::PARAM_STR);
@@ -35,7 +35,8 @@ class Users {
         $addUser->bindValue(':avatarLink', 'assets/img/avatar.png', PDO::PARAM_STR);
         $addUser->bindValue(':idGenders', $this->gender, PDO::PARAM_INT);
         $addUser->bindValue(':idCountrys', $this->idCountrys, PDO::PARAM_INT);
-        $addUser->bindValue(':idMembersRights', 1, PDO::PARAM_INT);
+        $addUser->bindValue(':idMembersRights', 3, PDO::PARAM_INT);
+        $addUser->bindValue(':disabled', 1, PDO::PARAM_INT);
         $result = $addUser->execute();
         if ($result)
         {
@@ -123,21 +124,17 @@ class Users {
      */
     public function connectionUser()
     {
-        $query = 'SELECT `us`.`id`, `us`.`login`, `us`.`disabled`, '
+        $query = 'SELECT `us`.`id`, `us`.`login`, '
                 . 'DATE_FORMAT(`us`.`birthdate`, \'%d %M %Y\') '
                 . 'AS `birthdate`, `us`.`mail`, `us`.`password`, `us`.`avatarLink`, '
                 . 'DATE_FORMAT(`us`.`registrationDate`, \'%d %M %Y\') AS `registrationDate`, '
                 . 'DATE_FORMAT(`us`.`lastConnection`, \'le %d %M %Y à %H h %i\') AS `lastConnection`, '
-                . '`us`.`idGenders`, `us`.`idCountrys`, `us`.`idMembersRights`, '
+                . '`us`.`idGenders`, `us`.`idCountrys`, `us`.`idMembersRights`, `us`.`disabled`, '
                 . '`cntry`.`country`, `gdrs`.`gender`, `mt`.`idMembersTeamRight` '
-                . 'FROM `gt1m_users` '
-                . 'AS `us` '
-                . 'LEFT JOIN `gt1m_countrys` 
-                    AS `cntry` ON `us`.`idCountrys`=`cntry`.`id` '
-                . 'LEFT JOIN `gt1m_genders` 
-                    AS `gdrs` ON `us`.`idGenders`=`gdrs`.`id` '
-                . 'INNER JOIN `gt1m_membersTeam` '
-                .  'AS `mt` ON `us`.`id` = `mt`.`idUsers`'
+                . 'FROM `gt1m_users` AS `us` '
+                . 'LEFT JOIN `gt1m_countrys` AS `cntry` ON `us`.`idCountrys`=`cntry`.`id` '
+                . 'LEFT JOIN `gt1m_genders` AS `gdrs` ON `us`.`idGenders`=`gdrs`.`id` '
+                . 'LEFT JOIN `gt1m_membersTeam` AS `mt` ON `us`.`id`=`mt`.`idUsers`'
                 . 'WHERE `us`.`login`=:login';
         $connectUser = $this->pdo->prepare($query);
         $connectUser->bindValue(':login', $this->login, PDO::PARAM_STR);

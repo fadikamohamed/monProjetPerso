@@ -132,6 +132,8 @@ class ScantradTeams {
         $getUserTeamRight->bindValue(':idScantradTeams', $this->id, PDO::PARAM_INT);
         $getUserTeamRight->execute();
         $result = $getUserTeamRight->fetch(PDO::FETCH_OBJ);
+        /*var_dump($getUserTeamRight->fetch(PDO::FETCH_OBJ));
+        var_dump($result);*/
         if (is_object($result))
         {
             return $result;

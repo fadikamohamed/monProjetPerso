@@ -2,7 +2,7 @@
 require_once 'controllers/controllerConnection.php';
 
 if (!empty($_SESSION['isConnected']) && $_SESSION['isConnected'] = true) { ?>
-    <div id="profil" class="profil">
+    <div id="profil" class="profil cell medium-6 large-6">
         <div class="grid-container">
             <div class="grid-x grid-padding-x">
                 <h5 id="connectionTitle" class="text-center large-12"><?= $_SESSION['login'] ?></h5>
