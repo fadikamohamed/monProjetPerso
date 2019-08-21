@@ -93,7 +93,7 @@ class Chapters {
      * Méthode qui permet de supprimer les chapitres d'un manga
      * @return boolean
      */
-    public function deleteChapters()
+    /*public function deleteChapters()
     {
         $result = false;
         $query = 'UPDATE `gt1m_chapters` '
@@ -101,6 +101,26 @@ class Chapters {
                 . 'WHERE `idMangas`=:idMangas AND `chapter`=:chapter';
         $deleteManga = $this->pdo->prepare($query);
         $deleteManga->bindValue(':disabled', 2, PDO::PARAM_INT);
+        $deleteManga->bindValue(':chapter', $this->chapter, PDO::PARAM_STR);
+        $deleteManga->bindValue(':idMangas', $this->idMangas, PDO::PARAM_INT);
+        if ($deleteManga->execute())
+        {
+            $result = true;
+        }
+        return $result;
+    }*/
+
+
+    /**
+     * Méthode qui permet de supprimer les chapitres d'un manga
+     * @return boolean
+     */
+    public function deleteChapters()
+    {
+        $result = false;
+        $query = 'DELETE FROM `gt1m_chapters` '
+                . 'WHERE `idMangas`=:idMangas AND `chapter`=:chapter';
+        $deleteManga = $this->pdo->prepare($query);
         $deleteManga->bindValue(':chapter', $this->chapter, PDO::PARAM_STR);
         $deleteManga->bindValue(':idMangas', $this->idMangas, PDO::PARAM_INT);
         if ($deleteManga->execute())

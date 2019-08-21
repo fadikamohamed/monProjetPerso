@@ -1,7 +1,7 @@
 <?php
 
 $textPattern = '/^[0-9a-zéùîâêàäëïüöûç\'\s-,.!?;:()"@=€$&#*£]+$/i'; //regex pour le contenu du message et le sujet
-$namePattern = '#^[a-zA-Zéùîâêäëïüöûçæ\'\s-]+$#'; // regex pour le nom, la ville 
+$namePattern = '/^[a-zA-Zéùîâêäëïüöûçæ\'\s-]+$/'; // regex pour le nom, la ville 
 $phonePattern = '/^[0][1-9]([\/\- .]?[\d]{2}){4}$/'; //regex pour le numéro de téléphone
 //Déclaration des régex
     $lastnameRegex = '/^[a-z _\'\-àâäéèêëîïôöûüùçæ]*$/i';
@@ -21,4 +21,4 @@ $phonePattern = '/^[0][1-9]([\/\- .]?[\d]{2}){4}$/'; //regex pour le numéro de 
     $typesRegex = '/(manga|manhua|manhwa|manfra)/i';
     $categorysRegex = '/(shonen|shojo|seinen|josei|doujinshi|amateur)/i';
     $statusRegex = '/(En cours|terminé|One shot|En pause|abandonné)/i';
-    $countrysRegex = '';
+    $countrysRegex = '/./';

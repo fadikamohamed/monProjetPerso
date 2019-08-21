@@ -40,6 +40,10 @@ require_once 'configuration.php';
                                 ?>
                         </ul>
                     </div>
-                </div>
+                </div><?php
+                var_dump($_SESSION['idManga']);
+                var_dump($_SESSION['delete']);
+                var_dump($_SESSION['deleteResult']);
+                ?>
             </header>
         </div>

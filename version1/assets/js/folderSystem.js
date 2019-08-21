@@ -14,6 +14,8 @@ $(function () {
     $('#draggable').click(function () {
 
     });
+
+
     //Afficher le dossier du manga
     $('#bouttonf').click(function () {
         if ($('#containment-wrapper').hasClass('hide')) {
@@ -44,6 +46,10 @@ $(function () {
             $('#containment-wrapper').removeClass('hide');
         }
     });
+
+
+
+
     //Aller dans le dossier selectionné
     $('#sortable').sortable({
         start: function () {
@@ -70,6 +76,7 @@ $(function () {
                 });
                 e.stopPropagation();
             });
+
             //Retour en arriere
             $('#back').click(function () {
                 if ($('.chapterFolder').remove('.chapterFolder')) {
@@ -88,6 +95,7 @@ $(function () {
                     }
                 }
             });
+
             //Suppréssion d'une page ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             $('.deleteIcon').click(function () {
                 //Inclure l'id dans une variable idFile
@@ -149,9 +157,9 @@ $(function () {
                         }]
                 });
             });
-
+            //Suppréssion d'un dossier ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             $('.deleteFolder').click(function () {
-                var folderId = $(this).attr('id');
+                var folderPath = $(this).attr('id');
                 var folderName = $(this).attr('name');
                 $('#addChapterResult').empty();
                 $('#addChapterResult').append('Êtes vous sur de vouloir supprimer ce dossier ?');
@@ -169,13 +177,13 @@ $(function () {
                                 $.post(
                                         'controllers/foldersAjax.php',
                                         {
-                                            srcDeleteFolder: folderId,
+                                            srcDeleteFolder: folderPath,
                                             nameFolder: folderName
                                         },
                                         function result(response) {
                                             $('#addChapterResult').empty();
                                             $('#addChapterResult').dialog('destroy');
-                                            $('#addChapterResult').append('Le dossier a été supprimé');
+                                            $('#addChapterResult').append(response);
                                             $('#addChapterResult').dialog({
                                                 position: {
                                                     my: 'center center',
@@ -189,6 +197,7 @@ $(function () {
                                                             $('#addChapterResult').empty();
                                                             $('#addChapterResult').dialog('destroy');
                                                             $(folderId).remove(folderId);
+                                                            location.reload();
                                                             //Si ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                                                         }
                                                     }]
@@ -262,6 +271,4 @@ $(function () {
             }
         }
     });
-    //Supprimer un chapitre
-    $
 });

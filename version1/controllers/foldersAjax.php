@@ -131,7 +131,7 @@ elseif (!isset($_POST['srcDeleteFile']))
                 $nbr_fichier++;
                 echo '<div id="' . $inFolder . '" class="draggable ui-widget-content dossier">
                 <p>' . $inFolder . '</p>
-                    <img id="' . $_SESSION['idManga'] . '"name="' . $inFolder . '" src="assets/img/delete.png" class="deletefolder" />
+                    <img id="' . $_SESSION['idTeam'] . '/' . $_SESSION['idManga'] . '/' . 'chapters/' . $inFolder . '"name="' . $inFolder . '" src="assets/img/delete.png" class="deletefolder" />
             </div>';
             }
         }
@@ -155,20 +155,36 @@ if (!empty($_POST['srcDeleteFile']))
 
 if (!empty($_POST['srcDeleteFolder']))
 {
+    $folderPath = htmlspecialchars($_POST['srcDeleteFolder']);
     $folderName = htmlspecialchars($_POST['nameFolder']);
-    $folderid = htmlspecialchars($_POST['srcDeleteFolder']);
-    $folderPath = '../mangas' . '/' . $_SESSION['idTeam'] . '/' . $_SESSION['idManga'] . '/' . 'chapters/' . $folderName;
-    $deleteResult = rmdir($folderPath);
-    if ($deleteResult == true)
+    define('FILE_PATH', '../mangas' . '/' . $folderPath); 
+
+    function RemoveAll ( $path ) {
+        foreach ( new DirectoryIterator($path) as $item ):
+            if ( $item->isFile() ) unlink($item->getRealPath());
+            if ( !$item->isDot() && $item->isDir() ) RemoveAll($item->getRealPath());
+        endforeach;     
+        $result = rmdir($path);
+        return $result;
+    }
+     
+    $deleteResult = RemoveAll(FILE_PATH);
+
+    if ($deleteResult === true)
     {
-        echo 'true';
         $deleteChapter = NEW Chapters;
         $deleteChapter->chapter = $folderName;
         $deleteChapter->idMangas = $_SESSION['idManga'];
         $delete = $deleteChapter->deleteChapters();
+        $_SESSION['delete'] = $delete;
+        if($delete === true){
+            echo 'Chapitre supprimé avec succes !';
+        }else{
+            echo 'Les données n\'ont pas été supprimé de la base';
+        }
     }
     else
     {
-        echo 'false';
+        echo 'Le dossier n\'a pas été supprimé !';
     }
 }
