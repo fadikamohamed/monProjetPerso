@@ -12,11 +12,12 @@
         <button id="teamManagement">Gestion</button>
     <?php } ?>
 
-    <?php require 'team/mangasTeam.php'; ?>
+    <?php require 'team/homeTeam.php'; ?>
 
     <?php require 'team/mangasTeam.php'; ?>
 
     <?php require 'team/membersTeam.php'; ?>
 
     
+</div>
 </div>

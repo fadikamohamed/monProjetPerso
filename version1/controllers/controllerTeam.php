@@ -28,7 +28,6 @@ function team($id)
     {
         $_SESSION['adminId'] = $showTeam->createdByUserId;
     }
-    var_dump($_SESSION['adminId']);
     $getCategory = NEW MangaCategory();
     $categoryList = $getCategory->getMangasCategory();
     $getType = NEW MangaTypes();

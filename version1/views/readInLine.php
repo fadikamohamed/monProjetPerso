@@ -49,7 +49,7 @@
         </div>
     </div>
     <div class="grid-x grid-padding-x align-center">
-        <h2>Liste des mangas</h2>
+        <h2>Liste des series</h2>
         <table border="1">
             <thead>
                 <tr>

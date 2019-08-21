@@ -1,7 +1,7 @@
 <div id="membersTeam" class="hide">
-        <!-- Membres ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-        <h3>Membres</h3>
-        <div class="grid-x align-center">
+    <!-- Membres ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <h3>Membres</h3>
+    <div class="grid-x align-center">
         <!--            <h4>Ajouter un membre</h4>
                                 <form action="#" method="POST">
                     <label for="submitResearch">Entrez un pseudo : <input id="membersResearch" type="text" name="" value="" /></label>
@@ -29,9 +29,7 @@
             <tbody>
                 <?php
                 //Boucle générant la liste des membres de la team
-                foreach ($membersList as $list)
-                {
-                    ?>
+                foreach ($membersList as $list) { ?>
                     <tr>
                         <td><img class="avatarResearch" src="<?= $list->avatarLink ?>" /></td>
                         <td><a href=""></a><?= $list->login ?></td>
@@ -39,9 +37,8 @@
                         <td><?= $list->addingDate ?></td>
                         <td><input id="" type="submit" name="" value="Retirer" /></td>
                     </tr>
-                <?php }
-                ?>
+                <?php } ?>
             </tbody>
         </table>
-        </div>
     </div>
+</div>
